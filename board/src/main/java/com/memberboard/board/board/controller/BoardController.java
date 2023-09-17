@@ -12,11 +12,12 @@ public class BoardController {
 	
 	private Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
+	// boardlist
 	@GetMapping("/list")
 	public String boardList() {
 		
 		
-		return null;
+		return "board/boardList";
 		
 	}
 	
