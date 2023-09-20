@@ -4,21 +4,21 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.memberboard.board.board.model.service.BoardService;
+//import com.memberboard.board.board.model.service.BoardService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 	
-	@Autowired
-	private BoardService service;
+	//@Autowired
+	//private BoardService service;
 	
 	private Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
@@ -30,7 +30,7 @@ public class BoardController {
 		
 		Map<String, Object> map = null;
 		
-		map = service.selectBoardList(cp, model);
+		//map = service.selectBoardList(cp, model);
 		
 		model.addAttribute("map", map);
 		
@@ -44,7 +44,12 @@ public class BoardController {
 	public String boardWirte() {
 		
 		
-		return "board/boardWirte";
+		return "board/boardWrite";
 	}
 	
+	@PostMapping("/enroll")
+	public String boardEnroll() {
+		
+		return "redirect:/board/boardList";
+	}
 }

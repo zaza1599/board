@@ -8,5 +8,6 @@
 </head>
 <body>
 보드 리스트
+<a href="write">게시글 등록</a>
 </body>
 </html>
