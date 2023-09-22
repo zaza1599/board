@@ -2,14 +2,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 		<bean id="realDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 			<property name="url" value="jdbc:oracle:thin:@//localhost:1521/XE"/>
-			<property name="username" value="oracle.jdbc.driver.OracleDriver"/>
-			<property name="password" value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="username" value="board2"/>
+			<property name="password" value="1234"/>
 		<!-- SQL이 수행된 후 자동으로 Commit 되는것을 지정 -->
 		<property name="defaultAutoCommit" value="false"/>
 		
@@ -29,7 +34,16 @@
 		* realDataSource를 이용해서 SQL 수행 내용, 결과를 출력하는 역할
 		-> realDataSource를 대체하는 역할
 	 -->
-	
+	 <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+	 	<constructor-arg ref="realDataSource" />
+	 	
+	 	<property name="logFormatter">
+	 		<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+	 			<property name="loggingType" value="MULTI_LINE"/>
+	 			<property name="sqlPrefix" value="[SQL]" />
+	 		</bean>
+	 	</property>
+	 </bean>
 		 
 		 
 	<!-- MyBatis 관련 Bean 생성 -->	 
@@ -43,7 +57,7 @@
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 	
 		<!-- mybatis-config.xml 설정 불러오기 -->
-		<property name="configLocation" value="src/main/resources/mybatis-config.xml" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 

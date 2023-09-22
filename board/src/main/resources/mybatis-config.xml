@@ -17,5 +17,12 @@
 		
 	</settings>
 	
+	<typeAliases>
+		<typeAlias type="com.memberboard.board.board.model.vo.Board" alias="board"/>
+	</typeAliases>
 	
+	<mappers>
+	<mapper resource="/mappers/board-mapper.xml"/>
+	
+	</mappers>
 </configuration>

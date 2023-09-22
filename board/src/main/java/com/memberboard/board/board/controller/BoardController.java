@@ -1,5 +1,6 @@
 package com.memberboard.board.board.controller;
 
+
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.memberboard.board.board.model.vo.Board;
 
 //import com.memberboard.board.board.model.service.BoardService;
 
@@ -48,7 +51,9 @@ public class BoardController {
 	}
 	
 	@PostMapping("/enroll")
-	public String boardEnroll() {
+	public String boardEnroll(Board board) {
+		
+		logger.info("BoardVO : " + board);
 		
 		return "redirect:/board/boardList";
 	}
