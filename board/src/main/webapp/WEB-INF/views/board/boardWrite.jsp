@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>게시글 쓰는 페이지</h1>
-<form action="enroll" method="post">
+<form action="${pageContext.request.contextPath}/board/enroll" method="post">
     <div class="input_wrap">
         제목
         <input type="text" name="title">
