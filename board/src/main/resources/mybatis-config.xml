@@ -22,7 +22,7 @@
 	</typeAliases>
 	
 	<mappers>
-	<mapper resource="/mappers/board-mapper.xml"/>
+	<mapper resource="mappers/board-mapper.xml"/>
 	
 	</mappers>
 </configuration>
